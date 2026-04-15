@@ -8,15 +8,41 @@ servers:
 paths:
   /ingredients:
     get:
+      summary: List of all ingredients
       responses:
-        200:
-          description: List of all Ingredients
+        '200':
+          description: Get all ingredients success
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Ingredient'
+  /ingredients/{id}:
+    get:
+      summary: Get ingredient by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Get an ingredient success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+        '404':
+          description: Ingredient not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Ingredient.id={id} is not found"
 
 components:
   schemas:
