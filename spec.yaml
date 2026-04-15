@@ -1,0 +1,33 @@
+openapi : 3.0.3
+info :
+  title: Ingredient specification OSA
+  description: TD5 part 2 - ingredient specification
+  version: 1.0.0
+servers:
+  - url : http://localhost:8080
+paths:
+  /ingredients:
+    get:
+      responses:
+        200:
+          description: List of all Ingredients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+
+components:
+  schemas:
+    Ingredient:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
