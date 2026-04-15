@@ -101,6 +101,43 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Dish'
+  /dishes/{id}/ingredients:
+    put:
+      summary: Update ingredients of a dish (attach/detach)
+      description: Associate or dissociate a list of ingredients to a dish
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Dish ID
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        description: List of ingredients to associate/dissociate
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Ingredient'
+      responses:
+        '200':
+          description: Dish ingredients updated successfully
+        '400':
+          description: Missing request body
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Request body is required"
+        '404':
+          description: Dish not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Dish.id={id} is not found"
 
 components:
   schemas:
